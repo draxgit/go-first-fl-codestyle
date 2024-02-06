@@ -90,22 +90,27 @@ func startTraining(charName, charClass string) string {
 
 // обратите внимание на имя функции и имена переменных
 func choiseCharClass() string {
-	var approveChoice string
-	var charClass string
-
-	for approveChoice != "y" {
+	charClass := ""
+	for {
 		fmt.Print("Введи название персонажа, за которого хочешь играть: Воитель — warrior, Маг — mage, Лекарь — healer: ")
 		fmt.Scanf("%s\n", &charClass)
-		if charClass == "warrior" {
+		charClass = strings.ToLower(charClass)
+		switch charClass {
+		case "warrior":
 			fmt.Println("Воитель — дерзкий воин ближнего боя. Сильный, выносливый и отважный.")
-		} else if charClass == "mage" {
+		case "mage":
 			fmt.Println("Маг — находчивый воин дальнего боя. Обладает высоким интеллектом.")
-		} else if charClass == "healer" {
+		case "healer":
 			fmt.Println("Лекарь — могущественный заклинатель. Черпает силы из природы, веры и духов.")
+		default:
+			continue
 		}
+		var approveChoice string
 		fmt.Print("Нажми (Y), чтобы подтвердить выбор, или любую другую кнопку, чтобы выбрать другого персонажа: ")
 		fmt.Scanf("%s\n", &approveChoice)
-		approveChoice = strings.ToLower(approveChoice)
+		if strings.ToLower(approveChoice) == "y" {
+			break
+		}
 	}
 	return charClass
 }
